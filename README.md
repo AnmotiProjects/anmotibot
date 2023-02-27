@@ -1,4 +1,4 @@
-# Discord.js の Bot 作成用テンプレート
+# anmotibot
 
 ## 使用 npm パッケージ
 
