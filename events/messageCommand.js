@@ -17,12 +17,12 @@ module.exports = {
         if (typeof prefix === "undefined") {
             const mentionRe = new RegExp(`^<@!?${client.user.id}>`);
             if (config.command.mention && mentionRe.test(content)) {
-                prefix = config.prefixes[0];
-                trimContent = content.replace(mentionRe, "");
+                prefix = config.command.prefixes[0];
+                trimContent = content.replace(mentionRe, "") || config.command.default;
             } else return;
         };
-
-        const [name, ...args] = trimContent.split(/\s+/);
+        
+        const [name, ...args] = trimContent.split(/\s+/).filter(Boolean);
 
         const command = {
             ...commands.search(name),
@@ -31,7 +31,6 @@ module.exports = {
         };
 
         if (typeof command.message !== "function") return;
-
         if (!command) {
             //コマンドが間違ってる時の終了処理
             return;

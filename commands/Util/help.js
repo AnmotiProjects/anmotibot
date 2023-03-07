@@ -4,7 +4,12 @@ module.exports = {
     builder(CommandBuilder) {
         CommandBuilder
         .setName("help")
-        .setDescription("messageCommandの一覧とヘルプを表示します。");
+        .setDescription("messageCommandの一覧とヘルプを表示します。")
+        .addStringOption((option) =>
+            option
+            .setName("commandname")
+            .setDescription("commandの詳細を出したい場合に使用します。")
+        )
     },
     cooldown: 0,
     async message(message, logger) {
@@ -29,12 +34,15 @@ module.exports = {
             message.reply({ embeds: [embed] });
         } else {
             const command = commands.search(thisCommand.args[0]);
-            if (!command)
-                message.reply("その名前のmessageCommandが見つかりませんでした。");
+            if (!command) return message.reply("その名前のmessageCommandが見つかりませんでした。");
             const embed = embedUtils.default()
             .setTitle(`[ ${thisCommand.prefix}${command.name} ]の詳細`)
-            .setDescription(`\`\`\`json${command.json}\`\`\``);
+            .setDescription(`
+                名前: ${command.name}
+                説明: ${command.json.description}
+            `);
             message.reply({ embeds: [embed] });
+            console.log(command.json);
         };
-    },
+    }
 };
