@@ -1,5 +1,5 @@
 const fs = require("fs");
-const customLogger = require("./customLogger.js");
+const customLogger = require("./customLogger");
 
 module.exports = (client) => {
     const { dir } = client.config.event;

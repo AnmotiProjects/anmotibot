@@ -1,15 +1,9 @@
 const { EmbedBuilder } = require("discord.js");
-
-let config;
+const config = require("../config")
 
 module.exports = {
-    Setup(client) {
-        config = client.config;
-    },
     default() {
-        const embed = new EmbedBuilder()
+        return new EmbedBuilder()
         .setFooter({ text: config.embed.footer });
-
-        return embed;
     }
 };

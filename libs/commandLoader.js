@@ -1,6 +1,6 @@
-const { Collection, SlashCommandBuilder, REST, Routes, ButtonBuilder } = require("discord.js");
+const { Collection, SlashCommandBuilder, REST, Routes } = require("discord.js");
 const fs = require("fs");
-const customLogger = require("./customLogger.js");
+const customLogger = require("./customLogger");
 
 module.exports = (client) => {
     const { config } = client;

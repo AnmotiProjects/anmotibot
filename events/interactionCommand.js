@@ -17,16 +17,16 @@ module.exports = {
                 if (0 < remaining) {
                     //クールダウン中の終了処理
                     return;
-                };
-            };
+                }
+            }
             cooldowns.set(user.id, Date.now() + thisInfo.cooldown);
-        };
+        }
 
         try {
             thisInfo.interaction(interaction, thisInfo.logger);
         } catch (error) {
             thisInfo.logger.error(error);
             //エラー処理
-        };
+        }
     }
 };

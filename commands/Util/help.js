@@ -43,6 +43,6 @@ module.exports = {
             `);
             message.reply({ embeds: [embed] });
             console.log(command.json);
-        };
+        }
     }
 };

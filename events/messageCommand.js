@@ -3,7 +3,7 @@ const { Events } = require("discord.js");
 module.exports = {
     event: Events.MessageCreate,
     execute: (message, logger) => {
-        const { user, client, content, mentions } = message;
+        const { user, client, content } = message;
         const { commands, config } = client;
 
         let prefix, trimContent;
@@ -12,15 +12,15 @@ module.exports = {
                 prefix = _prefix;
                 trimContent = content.slice(prefix.length);
                 break;
-            };
-        };
+            }
+        }
         if (typeof prefix === "undefined") {
             const mentionRe = new RegExp(`^<@!?${client.user.id}>`);
             if (config.command.mention && mentionRe.test(content)) {
                 prefix = config.command.prefixes[0];
                 trimContent = content.replace(mentionRe, "") || config.command.default;
             } else return;
-        };
+        }
         
         const [name, ...args] = trimContent.split(/\s+/).filter(Boolean);
 
@@ -43,10 +43,10 @@ module.exports = {
                 if (0 < remaining) {
                     //クールダウン中の終了処理
                     return;
-                };
-            };
+                }
+            }
             cooldowns.set(user.id, Date.now() + command.cooldown);
-        };
+        }
 
         message.command = command;
 
@@ -55,6 +55,6 @@ module.exports = {
         } catch (error) {
             command.logger.error(error);
             //エラー処理
-        };
+        }
     },
 };
