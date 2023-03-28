@@ -1,5 +1,3 @@
-const { DiscordSnowflake } = require("@sapphire/snowflake"); //14.7.2 で削除
-
 module.exports = {
     builder(CommandBuilder) {
         CommandBuilder
@@ -22,7 +20,7 @@ async function ping(obj) {
     const reply = await obj.reply(base + "取得中...");
     const text = base + [
         `Websocket: ${obj.client.ws.ping}ms`,
-        `API Endpoint: ${Date.now() - DiscordSnowflake.timestampFrom(reply.id)}ms`
-    ].join("\r");//14.7.2で DiscordSnow.... を reply.createdTimestamp に変更
+        `API Endpoint: ${Date.now() - reply.createdTimestamp}ms`
+    ].join("\r");
     return { reply, text };
 };

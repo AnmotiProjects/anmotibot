@@ -18,7 +18,7 @@
     "homepage": "https://github.com/anmoti/discord.js-template#readme",
     "dependencies": {
         "dd-logger": "^1.0.0",
-        "discord.js": "^14.7.1",
+        "discord.js": "^14.8.0",
         "fs": "^0.0.1-security"
     },
     "devDependencies": {
