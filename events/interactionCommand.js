@@ -8,10 +8,10 @@ module.exports = {
 
         if (!interaction.isChatInputCommand()) return;
 
-        const thisInfo = commands.search(interaction.commandName);
+        const command = commands.search(interaction.commandName);
 
-        if (thisInfo.cooldown) {
-            const { cooldowns } = thisInfo;
+        if (command.cooldown) {
+            const { cooldowns } = command;
             if (cooldowns.has(user.id)) {
                 const remaining = cooldowns.get(user.id) - Date.now();
                 if (0 < remaining) {
@@ -19,13 +19,13 @@ module.exports = {
                     return;
                 }
             }
-            cooldowns.set(user.id, Date.now() + thisInfo.cooldown);
+            cooldowns.set(user.id, Date.now() + command.cooldown);
         }
 
         try {
-            thisInfo.interaction(interaction, thisInfo.logger);
+            command.interaction(interaction, command.logger);
         } catch (error) {
-            thisInfo.logger.error(error);
+            command.logger.error(error);
             //エラー処理
         }
     }

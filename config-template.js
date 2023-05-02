@@ -25,8 +25,7 @@ module.exports = {
         default: "help" //mentionがtrueのときにメンションが送られてきたときに実行するコマンド
     },
     logger: {
-        levels: ["error", "warn", "info"],
-        timezone: "9"
+        levels: ["error", "warn", "info"]
     },
     embed: {
         footer: "Developed by anmoti(2代目)#0512 (872633375343644763)"

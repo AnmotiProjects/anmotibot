@@ -1,9 +1,9 @@
 const { Client } = require("discord.js");
-const ddlogger = require("dd-logger");
+const { Logger } = require("dd-logger");
 const config = require("./config");
 
 const client = new Client(config.bot.option);
-client.logger = new ddlogger.Channel(config.logger);
+client.logger = new Logger(config.logger);
 client.config = config;
 
 const runFunc = [

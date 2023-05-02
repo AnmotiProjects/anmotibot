@@ -4,7 +4,7 @@ module.exports = {
         .setName("ping")
         .setDescription("pingを測定します。");
     },
-    cooldown: 0, //ms
+    cooldown: 0,
     async message(message, logger) {
         const { reply, text } = await ping(message);
         reply.edit(text);

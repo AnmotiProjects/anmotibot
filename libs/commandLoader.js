@@ -1,12 +1,11 @@
 const { Collection, SlashCommandBuilder, REST, Routes } = require("discord.js");
 const fs = require("fs");
-const customLogger = require("./customLogger");
 
 module.exports = (client) => {
     const { config } = client;
     const { dir } = config.command;
 
-    const logger = new customLogger("Command", client.logger);
+    const logger = client.logger.createChannel("command");
 
     client.commands = new Collection();
     client.commands.prefixes = config.command.prefixes;
@@ -20,7 +19,7 @@ module.exports = (client) => {
 
     fs.readdirSync(dir).forEach((folder) => {
         const folderPath = `${dir}/${folder}/`;
-        const cateLogger = new customLogger(folder, logger);
+        const categoryLogger = logger.createChild(folder);
         fs.readdirSync(folderPath).forEach((file) => {
             if (!file.endsWith(".js")) return;
             const command = {
@@ -33,7 +32,7 @@ module.exports = (client) => {
             Array("name", "description").forEach((eName) => {
                 command[eName] = command.json[eName];
             });
-            command.logger = new customLogger(command.name, cateLogger);
+            command.logger = categoryLogger.createChild(command.name);
             if (command.cooldown) command.cooldowns = new Collection();
             client.commands.set(command.name, command);
             logger.info(`Loaded ${folder} > ${command.name}`);
